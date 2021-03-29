@@ -1,9 +1,8 @@
-import React,{useState,createContext} from 'react'
+import React,{createContext, useReducer} from 'react'
+import AppReducer from './AppReducer';
 
-export const ItemContext = createContext();
-
-export const ItemProvider = (props) => {
-    let items = [
+const initialState = {
+    items: [
         {
             id:"1",
             name:"Tomate",
@@ -23,9 +22,35 @@ export const ItemProvider = (props) => {
             price: 5.0
         }
     ]
-    const [item, setItem] = useState(items);
+}
+
+export const ItemContext = createContext(initialState);
+
+export const ItemProvider = (props) => {
+  
+    const [state, dispatch] = useReducer(AppReducer,initialState);
+    
+    function addItem(item){
+        dispatch({
+            type: 'ADD_ITEM',
+            payload: item
+        })
+    }
+    
+    function deleteItem(id){
+        dispatch({
+            type: 'DELETE_ITEM',
+            payload: id
+        })
+    }
+
+
     return (
-       <ItemContext.Provider value={[item, setItem]}>
+       <ItemContext.Provider value={{
+           items: state.items,
+           addItem,
+           deleteItem
+       }}>
            {props.children}
        </ItemContext.Provider>
     )

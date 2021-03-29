@@ -4,9 +4,9 @@ import {nanoid} from 'nanoid';
 
 
 function AddItem() {
-    const [item, setItem] = useContext(ItemContext)
+     const {addItem} = useContext(ItemContext)
 
-    const addItem = e =>{
+    const addItemOne = e =>{
         e.preventDefault()
         const newItem = {
             id: nanoid(),
@@ -14,17 +14,14 @@ function AddItem() {
             price: parseFloat(e.target.price.value),
             quantity: parseInt(e.target.quantity.value)
         }
-
-        console.log(newItem);
-
-        setItem(preItem => [...item, newItem]);
+        addItem(newItem);
         e.target.reset()
     }
 
     return (
         <div className="p-4">
             <h3 className="text-center">Add Item List</h3>
-            <form onSubmit={addItem}>
+            <form onSubmit={addItemOne}>
                 <div className="form-group">
                     <input className="form-control" type="text" name="name" placeholder="Item Name ..." id=""/>
                 </div>

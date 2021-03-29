@@ -2,7 +2,7 @@ import React,{useContext} from 'react'
 import { ItemContext } from '../context/ItemContext'
 
 function NavBar() {
-  const [item] = useContext(ItemContext)
+  const {items} = useContext(ItemContext)
     return (
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         {/*  eslint-disable-next-line */}
@@ -15,7 +15,7 @@ function NavBar() {
           <ul class="navbar-nav mr-auto"> 
           </ul>
          <div className="my-2 my-lg-0 mf-4 mt-2">
-             <p className="font-weight-bold">Grace - {item.length}</p>
+             <p className="font-weight-bold">Grace - {items.length}</p>
          </div>
         </div>
       </nav>

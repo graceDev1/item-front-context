@@ -3,14 +3,15 @@ import { ItemContext } from '../context/ItemContext';
 
 
 function Item() {
-   const [item] = useContext(ItemContext);
+   const {items }= useContext(ItemContext);
+   const { deleteItem} = useContext(ItemContext);
 
     return (
-        item.map(ite => (
+        items.map(ite => (
             <div key={ite.id}>
                 <h5>{ite.name}</h5>
                 <p>Unit price {ite.price} * Quantity({ite.quantity}) = {ite.price * ite.quantity} $</p>
-                <button className="btn btn-outline-danger">delete</button>
+                <button onClick={()=> deleteItem(ite.id)} className="btn btn-outline-danger">delete</button>
             </div>
         ))
       
